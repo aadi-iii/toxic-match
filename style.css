@@ -1,0 +1,957 @@
+/* ==========================================================================
+   Red Flag Calculator - Shared Multi-Page Glassmorphism Stylesheet
+   ========================================================================== */
+
+/* 1. Global Reset & Base Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Poppins', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  height: 100vh;
+  width: 100vw;
+  overflow-x: hidden;
+  overflow-y: auto;
+  background: radial-gradient(circle at top right, #2d0b17, #1a1a2e 65%, #0b0512);
+  color: #ffffff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  padding: 1.5rem 1rem;
+}
+
+/* Utility Classes */
+.hidden {
+  display: none !important;
+}
+
+.fade-in {
+  animation: fadeIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* 2. Main Centered App Container */
+.app-container {
+  width: 100%;
+  max-width: 860px;
+  z-index: 10;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+}
+
+/* 3. Top External Bold Header & Byline */
+.external-header {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  z-index: 20;
+}
+
+.main-title {
+  font-family: 'Poppins', system-ui, sans-serif;
+  font-size: 1.65rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  background: linear-gradient(135deg, #ffffff 40%, #ff6666);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 0 20px rgba(255, 51, 51, 0.35);
+  line-height: 1.25;
+  margin-bottom: 0.25rem;
+}
+
+.byline {
+  font-family: 'Caveat', cursive;
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: rgba(255, 102, 102, 0.85);
+  text-shadow: 0 0 8px rgba(255, 51, 51, 0.3);
+  display: block;
+}
+
+/* 4. Glassmorphism Card Container Base */
+.glass-card {
+  background: rgba(20, 10, 15, 0.7);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 51, 51, 0.25);
+  border-radius: 24px;
+  box-shadow: 0 8px 32px rgba(255, 0, 0, 0.15), 0 0 15px rgba(255, 51, 51, 0.08);
+  padding: 2.5rem 2rem;
+  text-align: center;
+  position: relative;
+  transition: all 0.4s ease;
+}
+
+.page-card {
+  width: 100%;
+  max-width: 580px;
+  margin: 0 auto;
+}
+
+/* 5. Master Landing Card Container (index.html) */
+.master-card-wrapper {
+  background: rgba(20, 10, 15, 0.75);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1px solid rgba(255, 51, 51, 0.3);
+  border-radius: 28px;
+  box-shadow: 0 10px 40px rgba(255, 0, 0, 0.2), 0 0 20px rgba(255, 51, 51, 0.1);
+  padding: 2rem;
+  width: 100%;
+  max-width: 820px;
+  margin: 0 auto;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.mode-selector-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  width: 100%;
+  position: relative;
+}
+
+.inner-mode-card {
+  background: rgba(15, 8, 12, 0.5);
+  border: 1px solid rgba(255, 51, 51, 0.2);
+  border-radius: 20px;
+  padding: 2rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: left;
+  align-items: flex-start;
+  min-height: 270px;
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.2s ease, filter 0.2s ease, box-shadow 0.2s ease;
+  position: relative;
+  z-index: 1;
+}
+
+.inner-mode-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(255, 51, 51, 0.45);
+  box-shadow: 0 10px 32px rgba(255, 0, 0, 0.25);
+}
+
+/* Landing Page Mode Card Dimming & Selection */
+.inner-mode-card.dimmed {
+  opacity: 0.2;
+  transform: scale(0.94);
+  filter: grayscale(80%) brightness(0.5);
+  pointer-events: none;
+  box-shadow: none;
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+/* Mutual Cross-Swipe Classes */
+/* When Card 1 (Left) is selected: Card 1 slides right over Card 2 */
+.cross-slide-right {
+  transform: translateX(105%);
+  opacity: 1;
+  filter: brightness(1.25);
+  z-index: 5;
+  border-color: #ff3333;
+  box-shadow: 0 10px 40px rgba(255, 51, 51, 0.45);
+}
+
+/* When Card 2 (Right) is selected: Card 2 slides left over Card 1 */
+.cross-slide-left {
+  transform: translateX(-105%);
+  opacity: 1;
+  filter: brightness(1.25);
+  z-index: 5;
+  border-color: #ff3333;
+  box-shadow: 0 10px 40px rgba(255, 51, 51, 0.45);
+}
+
+.card-title {
+  font-size: 1.55rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, #ffffff 35%, #ff6666);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 0.5rem;
+}
+
+.card-description {
+  font-size: 0.86rem;
+  color: rgba(255, 255, 255, 0.72);
+  line-height: 1.5;
+  margin-bottom: 1.5rem;
+}
+
+/* 6. Split Main Card (.main-card) for Crossover Swipe Animation */
+.main-card {
+  background: rgba(20, 10, 15, 0.7);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 51, 51, 0.25);
+  border-radius: 24px;
+  box-shadow: 0 8px 32px rgba(255, 0, 0, 0.15), 0 0 15px rgba(255, 51, 51, 0.08);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  max-width: 680px;
+  margin: 0 auto;
+}
+
+.card-left {
+  padding: 2.25rem 1.75rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  text-align: left;
+  border-right: 1px solid rgba(255, 51, 51, 0.15);
+  background: rgba(15, 8, 12, 0.4);
+  opacity: 0.85;
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.2s ease, filter 0.2s ease;
+  z-index: 2;
+}
+
+.card-right {
+  padding: 2.25rem 1.75rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: stretch;
+  text-align: left;
+  background: rgba(25, 12, 18, 0.6);
+  opacity: 1;
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.2s ease, filter 0.2s ease;
+  z-index: 1;
+}
+
+.left-title {
+  font-size: 1.45rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, #ffffff 40%, #ff6666);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 0.5rem;
+  line-height: 1.25;
+}
+
+.left-subtitle {
+  font-size: 0.825rem;
+  color: rgba(255, 255, 255, 0.68);
+  line-height: 1.5;
+}
+
+/* Crossover Swipe Animation Keyframe Classes */
+.swipe-crossover-left {
+  transform: translateX(100%);
+  opacity: 1;
+  filter: brightness(1.25);
+  z-index: 3;
+}
+
+.swipe-crossover-right {
+  transform: translateX(-100%);
+  opacity: 0.5;
+  filter: brightness(0.6) grayscale(40%);
+  z-index: 1;
+}
+
+.dimmed-pane {
+  pointer-events: none;
+}
+
+/* 7. Headers & Badges */
+.pill-badge {
+  display: inline-block;
+  align-self: flex-start;
+  padding: 5px 14px;
+  background: rgba(255, 51, 51, 0.12);
+  border: 1px solid rgba(255, 51, 51, 0.35);
+  color: #ff6666;
+  font-size: 0.725rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  border-radius: 20px;
+  margin-bottom: 0.85rem;
+}
+
+.pill-badge.red-badge {
+  background: rgba(255, 0, 51, 0.22);
+  color: #ff334b;
+  border-color: rgba(255, 0, 51, 0.4);
+}
+
+.form-header {
+  margin-bottom: 1.25rem;
+}
+
+.form-title {
+  font-size: 1.45rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, #ffffff 35%, #ff6666);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 0.15rem;
+}
+
+.form-subtitle {
+  font-size: 0.825rem;
+  color: rgba(255, 255, 255, 0.65);
+  line-height: 1.4;
+}
+
+/* 8. Form Elements & Inputs */
+.input-group {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  gap: 0.35rem;
+  margin-bottom: 1.15rem;
+  width: 100%;
+}
+
+.input-group label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.85);
+  letter-spacing: 0.5px;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 12px 14px;
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 51, 51, 0.25);
+  border-radius: 12px;
+  color: #ffffff;
+  font-size: 0.9rem;
+  font-family: inherit;
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+.input-group input:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.input-group input::placeholder {
+  color: rgba(255, 255, 255, 0.35);
+}
+
+.input-group input:focus {
+  border-color: #ff3333;
+  box-shadow: 0 0 12px rgba(255, 51, 51, 0.35);
+  background: rgba(0, 0, 0, 0.6);
+}
+
+/* 9. Buttons & Button Groups */
+.button-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  width: 100%;
+  margin-top: 0.5rem;
+}
+
+.btn-primary {
+  width: 100%;
+  padding: 14px 24px;
+  background: linear-gradient(135deg, #ff3333 0%, #b3003b 100%);
+  border: none;
+  border-radius: 12px;
+  color: #ffffff;
+  font-size: 1.05rem;
+  font-weight: 700;
+  font-family: inherit;
+  cursor: pointer;
+  box-shadow: 0 4px 18px rgba(255, 51, 51, 0.35);
+  transition: all 0.3s ease;
+  text-decoration: none;
+  display: inline-block;
+  text-align: center;
+}
+
+.btn-primary.btn-alt {
+  background: linear-gradient(135deg, #e60039 0%, #800026 100%);
+  box-shadow: 0 4px 18px rgba(230, 0, 57, 0.35);
+}
+
+.btn-primary:hover:not(:disabled) {
+  transform: scale(1.02);
+  box-shadow: 0 6px 24px rgba(255, 51, 51, 0.6);
+}
+
+.btn-primary:active:not(:disabled) {
+  transform: scale(0.98);
+}
+
+.btn-primary:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.btn-secondary {
+  width: 100%;
+  padding: 12px 20px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 12px;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.9rem;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+/* Universal Top-Left Back-to-Home Button */
+.back-home-btn {
+  position: fixed;
+  top: 1.25rem;
+  left: 1.25rem;
+  z-index: 100;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 10px 18px;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 51, 51, 0.35);
+  border-radius: 14px;
+  color: #ffffff;
+  font-family: inherit;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25), 0 0 10px rgba(255, 51, 51, 0.1);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.back-home-btn:hover {
+  background: rgba(255, 51, 51, 0.18);
+  border-color: #ff3333;
+  color: #ffffff;
+  transform: translateX(-3px) scale(1.02);
+  box-shadow: 0 6px 20px rgba(255, 51, 51, 0.4);
+}
+
+.back-home-btn:active {
+  transform: translateX(-1px) scale(0.98);
+}
+
+/* 10. External Status / Loading Message (Positioned Below Card) */
+.status-message {
+  margin-top: 1.25rem;
+  padding: 12px 20px;
+  background: rgba(20, 10, 15, 0.7);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 51, 51, 0.35);
+  border-radius: 20px;
+  box-shadow: 0 6px 24px rgba(255, 0, 0, 0.2), 0 0 12px rgba(255, 51, 51, 0.15);
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #ff9999;
+  font-style: italic;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.7rem;
+  text-shadow: 0 0 10px rgba(255, 51, 51, 0.4);
+  animation: pulseText 1.2s infinite ease-in-out;
+  max-width: 460px;
+  width: 90%;
+  z-index: 15;
+  transition: all 0.4s ease;
+}
+
+@keyframes pulseText {
+  0%, 100% { opacity: 0.8; transform: scale(0.99); }
+  50% { opacity: 1; transform: scale(1.01); }
+}
+
+.spinner-icon {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(255, 51, 51, 0.25);
+  border-top-color: #ff3333;
+  border-radius: 50%;
+  animation: spin 0.45s linear infinite;
+  will-change: transform;
+  transform: translateZ(0);
+  flex-shrink: 0;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* 11. Quiz Screen & Result Screen Styling */
+.quiz-header {
+  margin-bottom: 1.5rem;
+}
+
+.question-counter {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.6);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #ff3333, #ff6666);
+  border-radius: 10px;
+  transition: width 0.4s ease;
+}
+
+.question-text {
+  font-size: 1.2rem;
+  font-weight: 700;
+  line-height: 1.4;
+  margin-bottom: 1.5rem;
+  color: #ffffff;
+}
+
+.options-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.option-btn {
+  width: 100%;
+  padding: 14px 16px;
+  background: rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 12px;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 0.95rem;
+  font-family: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.option-btn:hover {
+  background: rgba(255, 51, 51, 0.15);
+  border-color: rgba(255, 51, 51, 0.4);
+  transform: translateY(-2px);
+  color: #ffffff;
+}
+
+.result-header {
+  margin-bottom: 1.5rem;
+}
+
+.result-score {
+  font-size: 3.5rem;
+  font-weight: 800;
+  color: #ff3333;
+  text-shadow: 0 0 20px rgba(255, 51, 51, 0.5);
+  margin: 0.5rem 0;
+  line-height: 1;
+}
+
+.result-badge-text {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #ff8080;
+  margin-bottom: 1rem;
+}
+
+.roast-container {
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 51, 51, 0.2);
+  border-radius: 14px;
+  padding: 1.25rem;
+  margin-bottom: 1.75rem;
+}
+
+.result-roast {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+/* 12. Background Animated SVG Elements */
+#background-elements {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.floating-svg {
+  position: absolute;
+  width: 36px;
+  height: 36px;
+  bottom: -60px;
+  opacity: 0.12;
+  animation: float-up linear infinite;
+  user-select: none;
+}
+
+.pos-1 { left: 10%; }
+.pos-2 { left: 28%; }
+.pos-3 { left: 46%; }
+.pos-4 { left: 68%; }
+.pos-5 { left: 86%; }
+
+.speed-1 { animation-duration: 10s; animation-delay: 0s; }
+.speed-2 { animation-duration: 14s; animation-delay: 3s; }
+.speed-3 { animation-duration: 12s; animation-delay: 5s; }
+.speed-4 { animation-duration: 16s; animation-delay: 1s; }
+
+@keyframes float-up {
+  0% {
+    transform: translateY(10vh) rotate(0deg);
+    opacity: 0;
+  }
+  15% {
+    opacity: 0.14;
+  }
+  85% {
+    opacity: 0.14;
+  }
+  100% {
+    transform: translateY(-110vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+/* Responsive Layout for Mobile Devices */
+@media (max-width: 768px) {
+  .mode-selector-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .main-card {
+    grid-template-columns: 1fr;
+  }
+
+  .card-left {
+    border-right: none;
+    border-bottom: 1px solid rgba(255, 51, 51, 0.15);
+  }
+
+  .main-title {
+    font-size: 1.3rem;
+    letter-spacing: 1px;
+  }
+
+  .byline {
+    font-size: 1.1rem;
+  }
+
+  .glass-card, .master-card-wrapper {
+    padding: 1.5rem 1.15rem;
+  }
+
+  .cross-slide-right, .cross-slide-left {
+    transform: none;
+  }
+
+  .back-home-btn {
+    top: 0.75rem;
+    left: 0.75rem;
+    padding: 7px 12px;
+    font-size: 0.78rem;
+    border-radius: 10px;
+  }
+}
+
+/* 13. Navigation Footer Links */
+.footer-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+  z-index: 20;
+}
+
+.nav-link {
+  color: rgba(255, 255, 255, 0.65);
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.25s ease;
+  letter-spacing: 0.5px;
+}
+
+.nav-link:hover, .nav-link.active {
+  color: #ff6666;
+  text-shadow: 0 0 10px rgba(255, 102, 102, 0.4);
+}
+
+.nav-dot {
+  color: rgba(255, 51, 51, 0.4);
+  font-size: 0.85rem;
+}
+
+/* 14. About & Contact Page Content Styling */
+.content-card {
+  text-align: left;
+}
+
+.about-section {
+  margin-bottom: 1.25rem;
+}
+
+.about-heading {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #ff8080;
+  margin-bottom: 0.35rem;
+}
+
+.about-text {
+  font-size: 0.88rem;
+  color: rgba(255, 255, 255, 0.82);
+  line-height: 1.6;
+}
+
+.about-list {
+  list-style-type: none;
+  padding-left: 0;
+  margin-top: 0.35rem;
+}
+
+.about-list li {
+  font-size: 0.86rem;
+  color: rgba(255, 255, 255, 0.8);
+  line-height: 1.55;
+  margin-bottom: 0.5rem;
+  position: relative;
+  padding-left: 1.25rem;
+}
+
+.about-list li::before {
+  content: "🚩";
+  position: absolute;
+  left: 0;
+  font-size: 0.8rem;
+}
+
+.about-disclaimer {
+  background: rgba(255, 51, 51, 0.1);
+  border: 1px solid rgba(255, 51, 51, 0.25);
+  border-radius: 12px;
+  padding: 1rem;
+  font-size: 0.825rem;
+  color: #ff9999;
+  line-height: 1.5;
+  margin-top: 1.25rem;
+}
+
+/* 15. Social Links Grid (contact.html) */
+.social-links-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 0.85rem;
+  margin-top: 1.25rem;
+  width: 100%;
+}
+
+.social-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  padding: 12px 16px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 12px;
+  color: #ffffff;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.social-btn:hover {
+  transform: translateY(-3px);
+}
+
+.social-btn.instagram:hover {
+  background: linear-gradient(135deg, rgba(225, 48, 108, 0.25), rgba(253, 29, 29, 0.25));
+  border-color: #e1306c;
+  box-shadow: 0 6px 20px rgba(225, 48, 108, 0.35);
+}
+
+.social-btn.github:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: #ffffff;
+  box-shadow: 0 6px 20px rgba(255, 255, 255, 0.25);
+}
+
+.social-btn.linkedin:hover {
+  background: rgba(0, 119, 181, 0.25);
+  border-color: #0077b5;
+  box-shadow: 0 6px 20px rgba(0, 119, 181, 0.35);
+}
+
+/* ==========================================================================
+   16. Fixed Top Glassmorphic Navigation Bar
+   ========================================================================== */
+body {
+  padding-top: 80px !important;
+}
+
+.top-navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 64px;
+  background: rgba(13, 13, 22, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 2rem;
+  z-index: 1000;
+  transition: all 0.3s ease;
+}
+
+.nav-brand {
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: #ffffff;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  letter-spacing: 0.5px;
+}
+
+.nav-brand:hover .brand-flag {
+  transform: rotate(-10deg) scale(1.15);
+}
+
+.brand-flag {
+  display: inline-block;
+  transition: transform 0.25s ease;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.nav-item {
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-decoration: none;
+  padding: 6px 12px;
+  border-radius: 8px;
+  transition: all 0.25s ease;
+}
+
+.nav-item:hover {
+  color: #ff4d4d;
+  background: rgba(255, 77, 77, 0.1);
+  text-shadow: 0 0 10px rgba(255, 77, 77, 0.5);
+}
+
+.nav-item.active {
+  color: #ff4d4d;
+  background: rgba(255, 77, 77, 0.12);
+  border: 1px solid rgba(255, 77, 77, 0.25);
+  font-weight: 700;
+}
+
+.nav-item.external-link {
+  color: #ff80ab;
+}
+
+.nav-item.external-link:hover {
+  color: #ff4081;
+  background: rgba(255, 64, 129, 0.12);
+  text-shadow: 0 0 10px rgba(255, 64, 129, 0.5);
+}
+
+/* Adjust fixed back button position to sit cleanly below top navbar */
+.back-home-btn {
+  top: 76px !important;
+}
+
+@media (max-width: 768px) {
+  body {
+    padding-top: 68px !important;
+  }
+
+  .top-navbar {
+    padding: 0 0.85rem;
+    height: 56px;
+  }
+
+  .nav-brand {
+    font-size: 0.9rem;
+  }
+
+  .nav-links {
+    gap: 0.4rem;
+  }
+
+  .nav-item {
+    font-size: 0.75rem;
+    padding: 4px 7px;
+  }
+
+  .back-home-btn {
+    top: 64px !important;
+    left: 0.75rem !important;
+  }
+}
