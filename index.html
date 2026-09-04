@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Red Flag Calculator - Select Mode</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- Fixed Top Glassmorphic Navigation Bar -->
+  <header class="top-navbar">
+    <a href="index.html" class="nav-brand">
+      <span class="brand-flag">🚩</span> Red Flag Calculator
+    </a>
+    <nav class="nav-links">
+      <a href="index.html" class="nav-item active">Home</a>
+      <a href="about.html" class="nav-item">About</a>
+      <a href="https://aadi-iii.github.io/Love-Calculator/" target="_blank" rel="noopener noreferrer" class="nav-item external-link">
+        Love Calculator 💖
+      </a>
+      <a href="contact.html" class="nav-item">Contact</a>
+    </nav>
+  </header>
+
+  <div class="app-container">
+    
+    <!-- Top External Bold Header -->
+    <div class="external-header">
+      <h1 class="main-title">EVERY HEART DESERVES A BACKGROUND CHECK</h1>
+      <span class="byline">by aadiii</span>
+    </div>
+
+    <!-- Master Card Wrapper Container -->
+    <div id="master-card-wrapper" class="master-card-wrapper">
+      
+      <!-- Mode Selector Grid Inside Master Card -->
+      <div class="mode-selector-grid">
+        
+        <!-- Card 1 (Left): Solo Red Flag Quiz Mode -->
+        <div id="quiz-mode-card" class="mode-card inner-mode-card card-left-pane">
+          <div class="pill-badge">DELULU IS NOT THE SOLULU</div>
+          <h2 class="card-title">Red Flag Quiz</h2>
+          <p class="card-description">
+            Answer 5 brutal questions about your crush, partner, or ex to evaluate their exact toxic red flags.
+          </p>
+          <button type="button" id="take-quiz-btn" class="btn-primary">
+            Take Red Flag Quiz 🚩
+          </button>
+        </div>
+
+        <!-- Card 2 (Right): Duo Toxicity Match Calculator Mode -->
+        <div id="calc-mode-card" class="mode-card inner-mode-card card-right-pane">
+          <div class="pill-badge red-badge">INSTANT REGRET GENERATOR</div>
+          <h2 class="card-title">Toxicity Match Calculator</h2>
+          <p class="card-description">
+            Enter both your names to generate an instant, savage toxicity match score & relationship forecast.
+          </p>
+          <button type="button" id="calc-match-btn" class="btn-primary btn-alt">
+            Calculate Toxicity Match ☣️
+          </button>
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- Navigation Footer -->
+    <nav class="footer-nav">
+      <a href="about.html" class="nav-link">About</a>
+      <span class="nav-dot">•</span>
+      <a href="contact.html" class="nav-link">Contact</a>
+    </nav>
+
+  </div>
+
+  <!-- Background Animated SVG Elements -->
+  <div id="background-elements" aria-hidden="true">
+    <svg class="floating-svg pos-1 speed-1" viewBox="0 0 24 24" fill="none" stroke="#ff3333" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/>
+      <line x1="4" y1="22" x2="4" y2="15"/>
+    </svg>
+    <svg class="floating-svg pos-2 speed-3" viewBox="0 0 24 24" fill="none" stroke="#ff3333" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+      <path d="M12 5.67l-1.5 4.5 3 2.5-2.5 3.5"/>
+    </svg>
+    <svg class="floating-svg pos-3 speed-2" viewBox="0 0 24 24" fill="none" stroke="#ff3333" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+      <line x1="12" y1="9" x2="12" y2="13"/>
+      <line x1="12" y1="17" x2="12.01" y2="17"/>
+    </svg>
+    <svg class="floating-svg pos-4 speed-4" viewBox="0 0 24 24" fill="none" stroke="#ff3333" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/>
+      <line x1="4" y1="22" x2="4" y2="15"/>
+    </svg>
+    <svg class="floating-svg pos-5 speed-2" viewBox="0 0 24 24" fill="none" stroke="#ff3333" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+      <path d="M12 5.67l-1.5 4.5 3 2.5-2.5 3.5"/>
+    </svg>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
