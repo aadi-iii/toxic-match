@@ -1,8 +1,47 @@
 /* ==========================================================================
-   Red Flag Calculator - Direct Zero-Delay Navigation Engine (script.js)
+   Red Flag Calculator - Direct Zero-Delay Navigation & Interaction Engine
    ========================================================================== */
 
-document.addEventListener('DOMContentLoaded', () => {
+// Global Fail-Safe Mobile Menu Toggle
+window.toggleNavMenu = function(e) {
+  if (e) {
+    if (e.preventDefault) e.preventDefault();
+    if (e.stopPropagation) e.stopPropagation();
+  }
+  const btn = document.getElementById('mobile-menu-btn');
+  const links = document.getElementById('nav-links');
+  if (btn && links) {
+    btn.classList.toggle('active');
+    links.classList.toggle('mobile-open');
+  }
+};
+
+function initAppEngine() {
+  const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+  const navLinks = document.getElementById('nav-links');
+
+  if (mobileMenuBtn && navLinks) {
+    mobileMenuBtn.onclick = window.toggleNavMenu;
+
+    // Close mobile menu when clicking any nav link
+    const navItems = navLinks.querySelectorAll('.nav-item');
+    navItems.forEach(item => {
+      item.addEventListener('click', () => {
+        if (mobileMenuBtn) mobileMenuBtn.classList.remove('active');
+        if (navLinks) navLinks.classList.remove('mobile-open');
+      });
+    });
+
+    // Close menu when clicking outside
+    document.addEventListener('click', (e) => {
+      if (mobileMenuBtn && navLinks && !mobileMenuBtn.contains(e.target) && !navLinks.contains(e.target)) {
+        mobileMenuBtn.classList.remove('active');
+        navLinks.classList.remove('mobile-open');
+      }
+    });
+  }
+
+  // Home Page Mode Selection Listeners
   const quizModeCard = document.getElementById('quiz-mode-card');
   const calcModeCard = document.getElementById('calc-mode-card');
   const takeQuizBtn = document.getElementById('take-quiz-btn');
@@ -30,4 +69,10 @@ document.addEventListener('DOMContentLoaded', () => {
       handleCalcSelection(e);
     }
   });
-});
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initAppEngine);
+} else {
+  initAppEngine();
+}
