@@ -1,5 +1,5 @@
 /* ==========================================================================
-   Red Flag Calculator - Direct Zero-Delay Navigation Engine (landing.js)
+   Red Flag Calculator - Direct Zero-Delay Navigation & Interaction Engine
    ========================================================================== */
 
 document.addEventListener('DOMContentLoaded', () => {
