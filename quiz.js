@@ -132,10 +132,10 @@ document.addEventListener('DOMContentLoaded', () => {
       badgeText = "⚠️ Mild Toxicity Caution";
       roastText = `${targetName} definitely has some red flags brewing under the surface. Not full-blown nuclear yet, but keep your eyes open before you end up on a 3 AM rant to your best friends.`;
     } else if (percentage <= 80) {
-      badgeText = "🚩 High Toxicity Danger";
+      badgeText = "⚠️ High Toxicity Danger";
       roastText = `${targetName} has enough toxic energy to power a small city. Pack your bags, block their number, and change your Netflix password immediately!`;
     } else {
-      badgeText = "BH Critical Nuclear Toxicity";
+      badgeText = "☢️ Critical Nuclear Toxicity";
       roastText = `RUN FOR YOUR LIFE! Change your legal name and fake your identity. ${targetName} is not just a red flag—they are the entire flag factory!`;
     }
 
