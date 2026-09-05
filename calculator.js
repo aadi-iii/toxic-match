@@ -8,6 +8,32 @@ let currentToxicityIndex = 0;
 let toxicityTotalScore = 0;
 let toxicityQuestions = [];
 
+async function saveCalculatorResultToFirestore(resultData) {
+  try {
+    const { initializeApp } = await import("https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js");
+    const { getFirestore, collection, addDoc, serverTimestamp } = await import("https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js");
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyA_RZ6KkA7DbRgvgZ6MucVKm4QYldSpNCA",
+      authDomain: "love-n-toxic-analytics.firebaseapp.com",
+      projectId: "love-n-toxic-analytics",
+      storageBucket: "love-n-toxic-analytics.firebasestorage.app",
+      messagingSenderId: "44732402596",
+      appId: "1:44732402596:web:5b14c469c2233207e94f31"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    await addDoc(collection(db, "toxicMatchAttempts"), {
+      ...resultData,
+      createdAt: serverTimestamp()
+    });
+  } catch (error) {
+    console.error("Firebase analytics logging error:", error);
+  }
+}
+
 /**
  * Polynomial Hash Algorithm combining name metrics with duo questionnaire responses
  */
@@ -179,6 +205,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (calcResultBadgeText) calcResultBadgeText.textContent = badgeText;
     if (calcResultRoast) calcResultRoast.textContent = roastText;
+
+    // Non-blocking Firebase Firestore Analytics Logging
+    saveCalculatorResultToFirestore({
+      mode: 'duo_calculator',
+      playerName: playerName,
+      partnerName: partnerName,
+      toxicityTotalScore: toxicityTotalScore,
+      normalizedQuizScore: normalizedQuizScore,
+      percentage: percentage,
+      badgeText: badgeText,
+      roastText: roastText
+    });
   }
 
   if (recalcBtn) {
