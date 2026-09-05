@@ -1189,6 +1189,7 @@ body {
     max-width: 100% !important;
     overflow-x: hidden !important;
     box-sizing: border-box !important;
+    justify-content: flex-start !important;
   }
 
   .app-container {
@@ -1196,6 +1197,8 @@ body {
     max-width: 100% !important;
     padding: 0 !important;
     box-sizing: border-box !important;
+    margin-top: auto !important;
+    margin-bottom: auto !important;
   }
 
   /* Clean Spaced-Out Background SVGs on Mobile (No Clutter, Low Glow, Behind Cards) */
