@@ -906,4 +906,3 @@ function getRandomDuoQuestions(count = 10) {
 window.duoQuestionBank = duoQuestionBank;
 window.getRandomDuoQuestions = getRandomDuoQuestions;
 
-

@@ -55,4 +55,3 @@ document.addEventListener('DOMContentLoaded', () => {
   if (quizSetupForm) quizSetupForm.addEventListener('submit', handleSetupSubmit);
   if (startQuizBtn) startQuizBtn.addEventListener('click', handleSetupSubmit);
 });
-
