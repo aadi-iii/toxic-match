@@ -69,6 +69,33 @@ function initAppEngine() {
       handleCalcSelection(e);
     }
   });
+
+  // Mobile Virtual Keyboard Auto-Scroll Handler for Inputs
+  function initMobileInputKeyboardScroll() {
+    function scrollToActiveInput(target) {
+      if (!target || target.tagName !== 'INPUT') return;
+      if (window.innerWidth <= 768 || 'ontouchstart' in window) {
+        setTimeout(() => {
+          target.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'nearest' });
+        }, 300);
+      }
+    }
+
+    document.addEventListener('focusin', (e) => {
+      scrollToActiveInput(e.target);
+    });
+
+    if (window.visualViewport) {
+      window.visualViewport.addEventListener('resize', () => {
+        const activeEl = document.activeElement;
+        if (activeEl && activeEl.tagName === 'INPUT') {
+          scrollToActiveInput(activeEl);
+        }
+      });
+    }
+  }
+
+  initMobileInputKeyboardScroll();
 }
 
 if (document.readyState === 'loading') {
