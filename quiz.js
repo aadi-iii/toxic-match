@@ -7,6 +7,32 @@ let currentRedFlagIndex = 0;
 let redFlagTotalScore = 0;
 let redFlagQuestions = [];
 
+async function saveQuizResultToFirestore(resultData) {
+  try {
+    const { initializeApp } = await import("https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js");
+    const { getFirestore, collection, addDoc, serverTimestamp } = await import("https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js");
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyA_RZ6KkA7DbRgvgZ6MucVKm4QYldSpNCA",
+      authDomain: "love-n-toxic-analytics.firebaseapp.com",
+      projectId: "love-n-toxic-analytics",
+      storageBucket: "love-n-toxic-analytics.firebasestorage.app",
+      messagingSenderId: "44732402596",
+      appId: "1:44732402596:web:5b14c469c2233207e94f31"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    await addDoc(collection(db, "toxicMatchAttempts"), {
+      ...resultData,
+      createdAt: serverTimestamp()
+    });
+  } catch (error) {
+    console.error("Firebase analytics logging error:", error);
+  }
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   const savedName = sessionStorage.getItem('targetName');
   if (!savedName) {
@@ -141,6 +167,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (resultBadgeText) resultBadgeText.textContent = badgeText;
     if (resultRoast) resultRoast.textContent = roastText;
+
+    // Non-blocking Firebase Firestore Analytics Logging
+    saveQuizResultToFirestore({
+      mode: 'solo_quiz',
+      targetName: targetName,
+      redFlagTotalScore: redFlagTotalScore,
+      percentage: percentage,
+      badgeText: badgeText,
+      roastText: roastText
+    });
   }
 
   if (restartQuizBtn) {
