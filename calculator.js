@@ -22,7 +22,7 @@ function calculateDuoToxicityScore(name1, name2, quizScore) {
   const lenDiff = Math.abs(n1.length - n2.length);
   const lenProduct = n1.length * n2.length;
 
-  const combined = n1 + "🚩" + n2;
+  const combined = n1 + "#flag#" + n2;
   let hash = 5381;
   for (let k = 0; k < combined.length; k++) {
     hash = ((hash << 5) + hash) + combined.charCodeAt(k);
@@ -170,7 +170,7 @@ document.addEventListener('DOMContentLoaded', () => {
       badgeText = "⚠️ Chaotic Neutral Chemistry";
       roastText = `${playerName} and ${partnerName}, you two are walking a fine line between 'couple goals' and 'mutual destruction'. You might survive, but keep your therapist on speed dial and stop double-texting at 3 AM!`;
     } else if (percentage <= 80) {
-      badgeText = "🚩 High Toxicity Hazard";
+      badgeText = "⚠️ High Toxicity Hazard";
       roastText = `${playerName} and ${partnerName}, your combined energy could cause a blackout in a small city! One of you is definitely leaving the other on read right now while reading this roast. Proceed with extreme caution!`;
     } else {
       badgeText = "BH Critical Nuclear Toxicity Match";
