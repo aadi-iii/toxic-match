@@ -66,3 +66,4 @@ document.addEventListener('DOMContentLoaded', () => {
   if (calcSetupForm) calcSetupForm.addEventListener('submit', handleCalcSetupSubmit);
   if (startCalcBtn) startCalcBtn.addEventListener('click', handleCalcSetupSubmit);
 });
+
